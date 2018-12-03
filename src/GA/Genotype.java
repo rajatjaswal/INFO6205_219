@@ -22,6 +22,10 @@ public class Genotype implements Comparable<Genotype>{
 		this.y = gene.getY();
 	}
 	
+	public Genotype() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public int compareTo(Genotype gene) {
 		// TODO Auto-generated method stub

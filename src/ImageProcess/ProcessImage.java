@@ -34,7 +34,7 @@ public class ProcessImage {
 		return rgbValue;
 	}
 	
-	private static Color getRandomColor() {
+	public static Color getRandomColor() {
 		return new Color(random.nextInt(255), random.nextInt(255),
 				random.nextInt(255));
 	}
