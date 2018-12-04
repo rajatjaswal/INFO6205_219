@@ -39,7 +39,7 @@ public class ProcessImage {
 				random.nextInt(255));
 	}
 	
-	private static BufferedImage getBufferedImage(Phenotype phenoType, BufferedImage original) {
+	public static BufferedImage getBufferedImage(Phenotype phenoType, BufferedImage original) {
 		BufferedImage image = new BufferedImage(original.getWidth(),
 				original.getHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D graphics = image.createGraphics();
