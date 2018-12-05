@@ -68,7 +68,7 @@ public class Main {
 				jPanel.setCurrimage(bestImage);
 			}
 			double fitness = 100 - 100.0 / 765 * (1.0* poolOfImages.get(0).getFitness() / initImage.getWidth() / initImage.getHeight());
-			System.out.printf("Generation: %s best fitness: %s%% chars: %s %s\n", i + 1,fitness, POPULATION_COUNT, IMAGE);
+			System.out.printf("GenerationNo: %s Fitness: %s%% Population: %s %s\n", i + 1,fitness, POPULATION_COUNT, IMAGE);
 			if (SHOW_UI) {
 				jPanel.repaint();
 			}
