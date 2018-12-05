@@ -23,7 +23,7 @@ public class Main {
 	private static final String IMAGE_LOCATION_SAVE = "SavedImages/";
 	private static final int POOL_SIZE = 500;
 	private static final String INPUTSTRING = "õäöüxywzabcdefghijklmnopqrstuv1234567890";
-	private static final int POPULATION_COUNT = 1800;
+	private static final int CHAR_COUNT = 1800;
 	private static final int ELITECOUNT = 10;
 	private static final int MAX_GENERATIONS = 10000;
 	private static final int MUTATION_COUNT = 1;
@@ -55,7 +55,7 @@ public class Main {
 		}
 		
 		//Populate 
-		poolOfImages=Populate.initPool(POOL_SIZE, POPULATION_COUNT, MAXFONT, initImage, INPUTSTRING);
+		poolOfImages=Populate.initPool(POOL_SIZE, CHAR_COUNT, MAXFONT, initImage, INPUTSTRING);
 		//Initialise threads
 		initThreads();
 		
@@ -68,13 +68,13 @@ public class Main {
 				jPanel.setCurrimage(bestImage);
 			}
 			double fitness = 100 - 100.0 / 765 * (1.0* poolOfImages.get(0).getFitness() / initImage.getWidth() / initImage.getHeight());
-			System.out.printf("GenerationNo: %s Fitness: %s%% Population: %s %s\n", i + 1,fitness, POPULATION_COUNT, IMAGE);
+			System.out.printf("GenerationNo: %s Fitness: %s%% Population: %s %s\n", i + 1,fitness, CHAR_COUNT, IMAGE);
 			if (SHOW_UI) {
 				jPanel.repaint();
 			}
 			saveImage(bestImage, i + 1, fitness);
 			// throw away bad results and substitute with children
-			poolOfImages = Mutation.mateBest(poolOfImages, ELITECOUNT, POPULATION_COUNT, MUTATION_COUNT, MAXFONT, bestImage, INPUTSTRING);
+			poolOfImages = Mutation.mateBest(poolOfImages, ELITECOUNT, CHAR_COUNT, MUTATION_COUNT, MAXFONT, bestImage, INPUTSTRING);
 			
 		}
 	}
@@ -120,7 +120,7 @@ public class Main {
 		List<Phenotype> imagePool = new ArrayList<>();
 		for (int i = 0; i < POOL_SIZE; i++) {
 			List<Genotype> genes = new ArrayList<>();
-			for (int j = 0; j < POPULATION_COUNT; j++) {
+			for (int j = 0; j < CHAR_COUNT; j++) {
 				genes.add(Mutation.getRandomGenes(MAXFONT, initImage, INPUTSTRING));
 			}
 			imagePool.add(new Phenotype(genes));

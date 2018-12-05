@@ -2,12 +2,14 @@ package UnitTest;
 
 import org.junit.Test;
 
+import GA.Genotype;
+
 /**
  * Test method of GeneticAlgorithm.
  */
 public class GeneticAlgorithmTest {
 	@Test
-    public void testInit() throws Exception {
+    public void testPopulate() throws Exception {
 		
 	}
 	@Test
