@@ -9,7 +9,7 @@ import ImageProcess.RGB;
 
 public class FitnessFunction {
 	
-	public static void evaluateFitness(Phenotype imageData, BufferedImage original, RGB[][] originalValues) {
+	public static void evaluateFitness(IndividualImage imageData, BufferedImage original, RGB[][] originalValues) {
 		BufferedImage image = new BufferedImage(original.getWidth(),original.getHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D graphics = image.createGraphics();
 		graphics.setPaint(new Color(255, 255, 255));

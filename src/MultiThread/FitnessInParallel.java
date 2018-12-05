@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import GA.FitnessFunction;
-import GA.Phenotype;
+import GA.IndividualImage;
 import ImageProcess.RGB;
 
 public class FitnessInParallel implements Runnable{
@@ -12,7 +12,7 @@ public class FitnessInParallel implements Runnable{
 	private int start;
 	private int end;
 	private boolean done = false;
-	private List<Phenotype> imageLists;
+	private List<IndividualImage> imageLists;
 
 	private BufferedImage original;
 	private RGB[][] originalValues;
@@ -56,11 +56,11 @@ public class FitnessInParallel implements Runnable{
 		this.done = done;
 	}
 
-	public List<Phenotype> getImageLists() {
+	public List<IndividualImage> getImageLists() {
 		return imageLists;
 	}
 
-	public void setImageLists(List<Phenotype> imageLists) {
+	public void setImageLists(List<IndividualImage> imageLists) {
 		this.imageLists = imageLists;
 	}
 

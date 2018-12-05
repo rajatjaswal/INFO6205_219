@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import GA.Genotype;
-import GA.Phenotype;
+import GA.IndividualImage;
 
 public class ProcessImage {
 	
@@ -39,7 +39,7 @@ public class ProcessImage {
 				random.nextInt(255));
 	}
 	
-	public static BufferedImage getBufferedImage(Phenotype phenoType, BufferedImage original) {
+	public static BufferedImage getBufferedImage(IndividualImage phenoType, BufferedImage original) {
 		BufferedImage image = new BufferedImage(original.getWidth(),
 				original.getHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D graphics = image.createGraphics();

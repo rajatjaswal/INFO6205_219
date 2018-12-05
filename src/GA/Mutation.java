@@ -58,7 +58,7 @@ public class Mutation {
 
 	}
 	
-	private static Phenotype mate(List<Phenotype> newPool, int elite, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
+	private static IndividualImage mate(List<IndividualImage> newPool, int elite, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
 		// get random 2 from elite
 		Random random=new Random();
 		int first = random.nextInt(elite);
@@ -70,7 +70,7 @@ public class Mutation {
 		return mate(newPool.get(first), newPool.get(second), population, mutationCount, maxFont, image, inputString);
 	}
 	
-	private static Phenotype mate(Phenotype first, Phenotype second, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
+	private static IndividualImage mate(IndividualImage first, IndividualImage second, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
 		Random random=new Random();
 		List<Genotype> genes = new ArrayList<>();
 		for (int i = 0; i < population; i++) {
@@ -87,11 +87,11 @@ public class Mutation {
 		for (int i = 0; i < mutationCount; i++) {
 			mutate(genes, maxFont, image, inputString);
 		}
-		return new Phenotype(genes);
+		return new IndividualImage(genes);
 	}
 	
-	public static List<Phenotype> mateBest(List<Phenotype> pool, int eliteCount, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
-		List<Phenotype> newPool = new ArrayList<>();
+	public static List<IndividualImage> mateBest(List<IndividualImage> pool, int eliteCount, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
+		List<IndividualImage> newPool = new ArrayList<>();
 		for (int i = 0; i < pool.size(); i++) {
 			if (i < eliteCount) {
 				newPool.add(pool.get(i));

@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 
 import GA.Genotype;
 import GA.Mutation;
-import GA.Phenotype;
+import GA.IndividualImage;
 import GA.Populate;
 import ImageProcess.ImageJPanel;
 import ImageProcess.ProcessImage;
@@ -34,7 +34,7 @@ public class Main {
 	private static BufferedImage initImage;
 	private static RGB[][] imageAsPixels;
 	
-	private static List<Phenotype> poolOfImages;
+	private static List<IndividualImage> poolOfImages;
 	private static List<FitnessInParallel> parallelFitnessEvaluators;
 	
 	public static void main(String args[]) {
@@ -91,7 +91,7 @@ public class Main {
 		}
 	}
 	
-	private static void fitnessOfEntireImage(List<Phenotype> poolOfImages) {
+	private static void fitnessOfEntireImage(List<IndividualImage> poolOfImages) {
 		// split between threads
 		int forOneThread = poolOfImages.size() / THREADS;
 		for (int i = 0; i < THREADS; i++) {
@@ -117,13 +117,13 @@ public class Main {
 	}
 	
 	private static void populate() {
-		List<Phenotype> imagePool = new ArrayList<>();
+		List<IndividualImage> imagePool = new ArrayList<>();
 		for (int i = 0; i < POOL_SIZE; i++) {
 			List<Genotype> genes = new ArrayList<>();
 			for (int j = 0; j < CHAR_COUNT; j++) {
 				genes.add(Mutation.getRandomGenes(MAXFONT, initImage, INPUTSTRING));
 			}
-			imagePool.add(new Phenotype(genes));
+			imagePool.add(new IndividualImage(genes));
 		}
 		poolOfImages = imagePool;
 	}
