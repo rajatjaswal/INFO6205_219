@@ -24,7 +24,7 @@ import ImageProcess.RGB;
 public class GeneticAlgorithmTest {
 	
 	@Test
-    public void testFitness() throws Exception {
+    public void testFitness1() throws Exception {
 		// Read two files
 		File filex,file1,file2;
 		BufferedImage oImage=null,image1 = null,image2=null;
@@ -47,6 +47,30 @@ public class GeneticAlgorithmTest {
 		long fitness2 = FitnessFunction.evaluateFitnessMain(image2, originalRGB);
 		assert(fitness1 > fitness2);
 	}
+	@Test
+    public void testFitness2() throws Exception {
+		// Read two files
+		File filex,file1,file2;
+		BufferedImage oImage=null,image1 = null,image2=null;
+		try {
+			// Read from a file
+			filex= new File("testImages/human.jpg");
+			file1 = new File("testImages/753.png");
+			file2 = new File("testImages/51.png");
+			oImage= ImageIO.read(filex);
+			image1 = ImageIO.read(file1);
+			image2 = ImageIO.read(file2);
+
+		} catch (IOException e) {
+			System.out.println("File not read!!");
+			return;
+		}
+		
+		RGB[][] originalRGB=ProcessImage.readValuesAsPixels(oImage);
+		long fitness1 = FitnessFunction.evaluateFitnessMain(image1, originalRGB);
+		long fitness2 = FitnessFunction.evaluateFitnessMain(image2, originalRGB);
+		assert(fitness1 < fitness2);
+	}
 	
 	@Test
 	public void testMutation() throws Exception{
@@ -67,7 +91,7 @@ public class GeneticAlgorithmTest {
 		assert(fitness1 > fitness2);
 	}
 	@Test
-	public void testPopulation() throws Exception{
+	public void testPopulation1() throws Exception{
 		int sizeOfPopulate = 0;
 		File file = new File("testImages/51.png");
 		BufferedImage bi = ImageIO.read(file);	
