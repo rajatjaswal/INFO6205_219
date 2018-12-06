@@ -3,6 +3,8 @@ package UnitTest;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -11,13 +13,14 @@ import org.junit.Test;
 import GA.FitnessFunction;
 import GA.Genotype;
 import GA.IndividualImage;
+import GA.Mutation;
 import ImageProcess.ProcessImage;
 import ImageProcess.RGB;
 
 /**
  * Test method of GeneticAlgorithm.
  */
-public class FitnessTest {
+public class GeneticAlgorithmTest {
 	
 	@Test
     public void testFitness() throws Exception {
@@ -41,6 +44,25 @@ public class FitnessTest {
 		RGB[][] originalRGB=ProcessImage.readValuesAsPixels(oImage);
 		long fitness1 = FitnessFunction.evaluateFitnessMain(image1, originalRGB);
 		long fitness2 = FitnessFunction.evaluateFitnessMain(image2, originalRGB);
+		assert(fitness1 > fitness2);
+	}
+	
+	@Test
+	public void testMutation() throws Exception{
+		List<Genotype> genotypeList = new ArrayList<>();
+		File file = new File("testImages/51.png");
+		BufferedImage bi = ImageIO.read(file);
+		for(int i=0;i<1800;i++){
+			genotypeList.add(Mutation.getRandomGenes(32, bi, "asgwvhf22qwertyuioplasdnjd"));	
+		}
+		RGB[][] originalRGB=ProcessImage.readValuesAsPixels(bi);
+		IndividualImage image= new IndividualImage(genotypeList);
+		
+		FitnessFunction.evaluateFitness(image, bi, originalRGB);
+		long fitness1 =image.getFitness();
+		Mutation.mutate(genotypeList, 32, bi, "asgwvhf22");
+		FitnessFunction.evaluateFitness(image, bi, originalRGB);
+		long fitness2 =image.getFitness();
 		assert(fitness1 > fitness2);
 	}
 }

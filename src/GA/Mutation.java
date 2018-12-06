@@ -27,7 +27,7 @@ public class Mutation {
 		return genotype;
 	}
 	
-	private static void mutate(List<Genotype> genotypeList, int maxFont, BufferedImage original, String inputString) {
+	public static void mutate(List<Genotype> genotypeList, int maxFont, BufferedImage original, String inputString) {
 		Random random=new Random();
 		int location = random.nextInt(genotypeList.size());
 		Genotype genotype = genotypeList.get(location);

@@ -79,4 +79,11 @@ public class Genotype implements Comparable<Genotype>{
 	public void setFitness(Long fitness) {
 		this.fitness = fitness;
 	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(character);
+	}
+	
+	
 }
