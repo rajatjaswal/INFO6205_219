@@ -58,7 +58,7 @@ public class Mutation {
 
 	}
 	
-	private static IndividualImage crossOver(List<IndividualImage> newPool, int elite, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
+	private static IndividualImage crossOver(List<IndividualImage> newPool, int elite, int charsCount, int mutationCount, int maxFont, BufferedImage image, String inputString) {
 		// get random 2 from elite
 		Random random=new Random();
 		int first = random.nextInt(elite);
@@ -67,13 +67,14 @@ public class Mutation {
 			second = random.nextInt(elite);
 		}
 		// mate the two
-		return crossOver(newPool.get(first), newPool.get(second), population, mutationCount, maxFont, image, inputString);
+		return crossOver(newPool.get(first), newPool.get(second), charsCount, mutationCount, maxFont, image, inputString);
 	}
 	
-	private static IndividualImage crossOver(IndividualImage first, IndividualImage second, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
+	
+	public static IndividualImage crossOver(IndividualImage first, IndividualImage second, int charsCount, int mutationCount, int maxFont, BufferedImage image, String inputString) {
 		Random random=new Random();
 		List<Genotype> genes = new ArrayList<>();
-		for (int i = 0; i < population; i++) {
+		for (int i = 0; i < charsCount; i++) {
 			switch (random.nextInt(2)) {
 			case 0:
 				genes.add(new Genotype(first.getGenes().get(i)));
@@ -90,13 +91,13 @@ public class Mutation {
 		return new IndividualImage(genes);
 	}
 	
-	public static List<IndividualImage> mateBest(List<IndividualImage> pool, int eliteCount, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
+	public static List<IndividualImage> mateBest(List<IndividualImage> pool, int eliteCount, int charsCount, int mutationCount, int maxFont, BufferedImage image, String inputString) {
 		List<IndividualImage> newPool = new ArrayList<>();
 		for (int i = 0; i < pool.size(); i++) {
 			if (i < eliteCount) {
 				newPool.add(pool.get(i));
 			} else {
-				newPool.add(crossOver(newPool, eliteCount, population, mutationCount, maxFont, image, inputString));
+				newPool.add(crossOver(newPool, eliteCount, charsCount, mutationCount, maxFont, image, inputString));
 			}
 		}
 		return newPool;
