@@ -2,6 +2,7 @@ package UnitTest;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -21,18 +22,25 @@ public class FitnessTest {
 	@Test
     public void testFitness() throws Exception {
 		// Read two files
-		System.out.println("asdsadasd");
-		File filex = new File("testImages/human.png");
-		BufferedImage oImage = ImageIO.read(filex);
-		File file1 = new File("testImages/1.png");
-		BufferedImage image1 = ImageIO.read(file1);
-		File file2 = new File("testImages/51.png");
-		BufferedImage image2 = ImageIO.read(file2);
-		RGB[][] originalRGB=ProcessImage.readValuesAsPixels(oImage);
+		File filex,file1,file2;
+		BufferedImage oImage=null,image1 = null,image2=null;
+		try {
+			// Read from a file
+			filex= new File("testImages/human.jpg");
+			file1 = new File("testImages/1.png");
+			file2 = new File("testImages/51.png");
+			oImage= ImageIO.read(filex);
+			image1 = ImageIO.read(file1);
+			image2 = ImageIO.read(file2);
+
+		} catch (IOException e) {
+			System.out.println("File not read!!");
+			return;
+		}
 		
+		RGB[][] originalRGB=ProcessImage.readValuesAsPixels(oImage);
 		long fitness1 = FitnessFunction.evaluateFitnessMain(image1, originalRGB);
 		long fitness2 = FitnessFunction.evaluateFitnessMain(image2, originalRGB);
-		System.out.println(fitness1 + " "+fitness2);
-//		assert(fitness1, fitness2);
+		assert(fitness1 > fitness2);
 	}
 }
