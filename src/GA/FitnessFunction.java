@@ -21,6 +21,12 @@ public class FitnessFunction {
 		}
 		graphics.dispose();
 
+		
+		long difference=evaluateFitnessMain(image, originalValues);
+		imageData.setFitness(difference);
+	}
+	
+	public static long evaluateFitnessMain(BufferedImage image, RGB[][] originalValues) {
 		int red = 0;
 		int green = 0;
 		int blue = 0;
@@ -35,7 +41,6 @@ public class FitnessFunction {
 				difference += originalValues[i][j].difference(rgb);
 			}
 		}
-
-		imageData.setFitness(difference);
+		return difference;
 	}
 }
