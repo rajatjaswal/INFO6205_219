@@ -1,10 +1,14 @@
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -31,13 +35,15 @@ public class Main {
 	private static final int THREADS = 3;
 	private static final boolean SHOW_UI = true;
 	
+	private static Writer writer;
+	
 	private static BufferedImage initImage;
 	private static RGB[][] imageAsPixels;
 	
 	private static List<IndividualImage> poolOfImages;
 	private static List<FitnessInParallel> parallelFitnessEvaluators;
 	
-	public static void main(String args[]) {
+	public static void main(String args[]) throws IOException {
 		//Reading Image and converting them in pixels.
 		readInitImage();
 		imageAsPixels=ProcessImage.readValuesAsPixels(initImage);
@@ -58,7 +64,24 @@ public class Main {
 		poolOfImages=Populate.initPool(POOL_SIZE, CHAR_COUNT, MAXFONT, initImage, INPUTSTRING);
 		//Initialise threads
 		initThreads();
-		
+		try {
+            
+            File file = new File("ProjectSheet.csv");
+            if(file.exists()){
+                file.delete();
+            }
+            file.createNewFile();
+            System.out.println("File Created");
+            writer = new FileWriter(file);
+            writer.append("Generations#,Fitness");
+            writer.append("\n");
+                       
+        }
+	  	catch (Exception e) {
+			// TODO: handle exception
+	  		System.out.println(e);
+		}
+		boolean excelReady=false;
 		for (int i = 0; i < MAX_GENERATIONS; i++) {
 			//Compute Fitness
 			fitnessOfEntireImage(poolOfImages);
@@ -75,11 +98,25 @@ public class Main {
 			saveImage(bestImage, i + 1, fitness);
 			// throw away bad results and substitute with children
 			poolOfImages = Mutation.mateBest(poolOfImages, ELITECOUNT, CHAR_COUNT, MUTATION_COUNT, MAXFONT, bestImage, INPUTSTRING);
-			
+			if(i<1000){
+				generateExcel(i+1,  poolOfImages.get(0).getFitness() );
+			}
+			else{
+				if(!excelReady){
+					writer.close();
+					excelReady = true;
+				}
+			}
 		}
 	}
-	
-	
+		
+	private static void generateExcel(int generation, long fitness) throws IOException {
+    		String sheetData = String.valueOf(generation)+","+String.valueOf(fitness);
+    		writer.append(sheetData);
+    		writer.append("\n");
+		
+	}
+
 	private static void saveImage(BufferedImage best, int generation,
 			double fitness) {
 		try {
