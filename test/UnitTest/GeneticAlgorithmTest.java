@@ -74,4 +74,15 @@ public class GeneticAlgorithmTest {
 		sizeOfPopulate = Populate.initPool(450, 200, 32, bi, "sss").size();
 		assert(sizeOfPopulate>0);
 	}
+	@Test
+	public void testGenotype() throws Exception{
+		File file = new File("testImages/51.png");
+		BufferedImage bi = ImageIO.read(file);
+		Genotype gene=Mutation.getRandomGenes(32, bi, "abcd");
+		if(gene.getCharacter()!='\0' && gene.getColor()!=null && gene.getSize() >= 0 && gene.getY() >=0) {
+			assert(true);
+		}else {
+			assert(false);
+		}
+	}
 }
