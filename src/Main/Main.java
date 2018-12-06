@@ -1,3 +1,5 @@
+package Main;
+
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -81,8 +83,9 @@ public class Main {
 			// TODO: handle exception
 	  		System.out.println(e);
 		}
-		boolean excelReady=false;
-		for (int i = 0; i < MAX_GENERATIONS; i++) {
+		boolean excelReady=false;	
+		double maxFitness = 0.0 ;
+		for (int i = 0; i < MAX_GENERATIONS && maxFitness < 93.212 ; i++) {
 			//Compute Fitness
 			fitnessOfMultipleImages(poolOfImages);
 			Collections.sort(poolOfImages);
@@ -98,6 +101,7 @@ public class Main {
 			saveImage(bestImage, i + 1, fitness);
 			// throw away bad results and substitute with children
 			poolOfImages = Mutation.mateBest(poolOfImages, ELITECOUNT, CHAR_COUNT, MUTATION_COUNT, MAXFONT, bestImage, INPUTSTRING);
+			maxFitness = fitness;
 			if(i<1000){
 				generateExcel(i+1,  poolOfImages.get(0).getFitness() );
 			}
