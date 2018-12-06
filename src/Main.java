@@ -38,7 +38,7 @@ public class Main {
 	private static List<FitnessInParallel> parallelFitnessEvaluators;
 	
 	public static void main(String args[]) {
-		//Load an Image
+		//Reading Image and converting them in pixels.
 		readInitImage();
 		imageAsPixels=ProcessImage.readValuesAsPixels(initImage);
 		

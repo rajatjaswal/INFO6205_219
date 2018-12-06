@@ -7,7 +7,7 @@ import GA.Genotype;
 /**
  * Test method of GeneticAlgorithm.
  */
-public class GeneticAlgorithmTest {
+public class FitnessTest {
 	@Test
     public void testPopulate() throws Exception {
 		
