@@ -14,6 +14,7 @@ import GA.FitnessFunction;
 import GA.Genotype;
 import GA.IndividualImage;
 import GA.Mutation;
+import GA.Populate;
 import ImageProcess.ProcessImage;
 import ImageProcess.RGB;
 
@@ -64,5 +65,13 @@ public class GeneticAlgorithmTest {
 		FitnessFunction.evaluateFitness(image, bi, originalRGB);
 		long fitness2 =image.getFitness();
 		assert(fitness1 > fitness2);
+	}
+	@Test
+	public void testPopulation() throws Exception{
+		int sizeOfPopulate = 0;
+		File file = new File("testImages/51.png");
+		BufferedImage bi = ImageIO.read(file);	
+		sizeOfPopulate = Populate.initPool(450, 200, 32, bi, "sss").size();
+		assert(sizeOfPopulate>0);
 	}
 }
