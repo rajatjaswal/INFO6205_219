@@ -61,7 +61,7 @@ public class Main {
 		
 		for (int i = 0; i < MAX_GENERATIONS; i++) {
 			//Compute Fitness
-			fitnessOfEntireImage(poolOfImages);
+			fitnessOfMultipleImages(poolOfImages);
 			Collections.sort(poolOfImages);
 			BufferedImage bestImage = ProcessImage.getBufferedImage(poolOfImages.get(0),initImage);
 			if (SHOW_UI) {
@@ -91,7 +91,7 @@ public class Main {
 		}
 	}
 	
-	private static void fitnessOfEntireImage(List<IndividualImage> poolOfImages) {
+	private static void fitnessOfMultipleImages(List<IndividualImage> poolOfImages) {
 		// split between threads
 		int forOneThread = poolOfImages.size() / THREADS;
 		for (int i = 0; i < THREADS; i++) {
