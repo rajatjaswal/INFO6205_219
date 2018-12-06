@@ -9,15 +9,7 @@ import GA.Genotype;
  */
 public class FitnessTest {
 	@Test
-    public void testPopulate() throws Exception {
-		
-	}
-	@Test
-    public void testMutation() throws Exception {
-		
-	}
-	@Test
-    public void testEvolve() throws Exception {
+    public void testFitness() throws Exception {
 		
 	}
 }
