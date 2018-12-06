@@ -40,7 +40,9 @@ c)ImageJPanel.java:
 ImageJPanel is the interface to visualize the fittest individual after every generation.
  
 3)Main Classes:
+
 a)Main.java:
+
 •The program starts from the main.java class where firstly we read an image and then converted the image into pixels.
 •We initialized the population of 500 individuals of 1800 random characters, colors, size, and position each.  
 •We distributed the fitness evaluator according to the thread, each thread is computing fitness of different set of individuals each.
