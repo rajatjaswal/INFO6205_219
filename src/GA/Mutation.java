@@ -58,7 +58,7 @@ public class Mutation {
 
 	}
 	
-	private static IndividualImage mate(List<IndividualImage> newPool, int elite, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
+	private static IndividualImage crossOver(List<IndividualImage> newPool, int elite, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
 		// get random 2 from elite
 		Random random=new Random();
 		int first = random.nextInt(elite);
@@ -67,10 +67,10 @@ public class Mutation {
 			second = random.nextInt(elite);
 		}
 		// mate the two
-		return mate(newPool.get(first), newPool.get(second), population, mutationCount, maxFont, image, inputString);
+		return crossOver(newPool.get(first), newPool.get(second), population, mutationCount, maxFont, image, inputString);
 	}
 	
-	private static IndividualImage mate(IndividualImage first, IndividualImage second, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
+	private static IndividualImage crossOver(IndividualImage first, IndividualImage second, int population, int mutationCount, int maxFont, BufferedImage image, String inputString) {
 		Random random=new Random();
 		List<Genotype> genes = new ArrayList<>();
 		for (int i = 0; i < population; i++) {
@@ -96,7 +96,7 @@ public class Mutation {
 			if (i < eliteCount) {
 				newPool.add(pool.get(i));
 			} else {
-				newPool.add(mate(newPool, eliteCount, population, mutationCount, maxFont, image, inputString));
+				newPool.add(crossOver(newPool, eliteCount, population, mutationCount, maxFont, image, inputString));
 			}
 		}
 		return newPool;
